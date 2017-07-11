@@ -191,6 +191,8 @@ class FileApi(BaseApi):
 			'fileSize': response['file_size'],
 			'fileId': response['file_id'],
 			'fileName': response['file_name'],
+			'fileType': response['file_type'],
+			'fileFormat': response['file_format'],
 			#------------------- sample info -----------------
 			'sampleBarcode': sample_info['sampleBarcode'],
 			'sampleType': sample_info['sampleType'], #tissue type
@@ -211,6 +213,15 @@ class FileApi(BaseApi):
 			'indexMd5sum': index_file_md5
 		}
 		return infodict
+	def _getFileInformation(self, response):
+
+		file_type = response['file_type']
+		file_size = response['file_size']
+
+		result = {
+
+		}
+		return result
 
 class CaseApi(BaseApi):
 	def _defineLocalAttributes(self):
@@ -227,8 +238,10 @@ class CaseApi(BaseApi):
 
 	def processApiResponse(self, raw_response):
 		all_case_files = self._getCaseFiles(raw_response)
-		all_case_files = []
+		all_case_files = {k:len(v) for k,v in all_case_files.items()}
+
 		common_information = self._getCommonInformation(raw_response, all_case_files)
+		common_information['fileCount'] = all_case_files
 		processed_response = raw_response
 		processed_response['basic_info'] = common_information
 
@@ -251,7 +264,8 @@ class CaseApi(BaseApi):
 	def _getCommonInformation(self, response, case_files):
 
 		common_info = {
-			'caseId': ""
+			'caseId': response['case_id'],
+			'primarySite': response['primary_site']
 		}
 
 		return common_info
@@ -273,7 +287,8 @@ CASE_API = CaseApi()
 
 
 if __name__ == "__main__":
-	test_file_uuid = "579bce59-438b-4ee2-b199-a91de73bca0e"
+	#test_file_uuid = "579bce59-438b-4ee2-b199-a91de73bca0e"
+	test_file_uuid = "e929e62c-9f23-46f3-a6f6-ca1246c0f8a6"
 	test_case_uuid = "0500f1a6-a528-43f3-b035-12d3b7c99c0f"
 	test_endpoint = "cases"
 	response = request(test_case_uuid, test_endpoint)

@@ -229,13 +229,7 @@ class GDCAPI:
 				* 'updated_datetime': string
 		"""
 
-		all_expand_fields = ['analysis', 'analysis.metadata.read_groups', 'analysis.input_files', 
-							 'annotations', 'archive', 'associated_entities', 'cases', 'cases.annotations',
-							 'cases.demographic', 'cases.diagnoses', 'cases.family_histories', 'cases.project',
-							 'cases.samples', 'cases.samples', 'downstream_analyses.output_files', 'center']
-		parameters = {
-			'expand': ','.join(all_expand_fields)
-		}
+
 
 		#----------------------- Send the request to the GDC Server --------------------------
 		response = self._request(uuid, endpoint = 'files', parameters = parameters, use_local = use_local)
@@ -414,7 +408,9 @@ class GDCAPI:
 		files = case_data['files']
 		#for f in files:
 		#   print(f['data_category'], f.get('experimental_strategy'))
-		bam_files = [i for i in files if (i.get('data_category') == 'Raw Sequencing Data' and i.get('experimental_strategy') in {"WXS", "WES", "WGS"})]
+		bam_files = [i for i in files if (i.get('data_category') == 
+			'Raw Sequencing Data' and i.get('experimental_strategy') in 
+			{"WXS", "WES", "WGS"})]
 
 		samples = dict()
 		for f in bam_files:
