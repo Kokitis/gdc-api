@@ -3,23 +3,23 @@ from collections import defaultdict
 from pprint import pprint
 import os
 import requests
-import utilities
 
 class BaseApi:
 	def __init__(self):
 		self._null_result = None
 		self._empty_resut = "unknown" # default value when the value doesn't have a value
 		self._defineLocalAttributes()
-		self.local_files = self._loadLocalApiFiles()
+		self.local_api = self._loadLocalApiFiles()
 
 	def __call__(self, uuid):
 		uuid = uuid.lower()
 		response = self.apiRequest(uuid)
+
 		return response
 
 	def _loadLocalApiFiles(self):
 		if os.path.exists(self.local_api_filename):
-			with open(local_file_api_filename, 'r') as api_file:
+			with open(self.local_api_filename, 'r') as api_file:
 				local_api = json.loads(api_file.read())
 		else:
 			local_api = defaultdict(lambda: None)
@@ -50,7 +50,7 @@ class BaseApi:
 			raw_response = raw_response.json()['data']
 			response = self.processApiResponse(raw_response)
 
-		return raw_response
+		return response
 
 	def processApiResponse(self, raw_response):
 		raise NotImplementedError()

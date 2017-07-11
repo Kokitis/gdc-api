@@ -8,7 +8,3 @@ import pytools.tabletools as tabletools
 import pytools.filetools as filetools
 import pytools.timetools as timetools
 import pytools.systemtools as systemtools
-
-import gdc_api
-
-API = gdc_api.GDCAPI()

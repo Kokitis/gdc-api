@@ -1,14 +1,9 @@
-import json
-from collections import defaultdict
-from pprint import pprint
-import os
-import requests
-import utilities
+import api_methods
 from .baseapi import BaseApi
 
 class CaseApi(BaseApi):
 	def _defineLocalAttributes(self):
-		self.local_api_filename = local_case_api_filename
+		self.local_api_filename = api_methods.getLocalFiles('caseApi')
 		self.endpoint = 'cases'
 		self.default_parameters = {
 			'expand': ','.join(
@@ -27,6 +22,7 @@ class CaseApi(BaseApi):
 		common_information['fileCount'] = all_case_files
 		processed_response = raw_response
 		processed_response['basic_info'] = common_information
+		return processed_response
 
 	def _processApiResponseDefaultValues(self):
 		pass

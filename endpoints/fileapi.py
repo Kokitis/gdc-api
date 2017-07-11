@@ -1,9 +1,4 @@
-import json
-from collections import defaultdict
-from pprint import pprint
-import os
-import requests
-import utilities
+import api_methods
 
 from .baseapi import BaseApi
 
@@ -11,7 +6,7 @@ from .baseapi import BaseApi
 
 class FileApi(BaseApi):
 	def _defineLocalAttributes(self):
-		self.local_api_filename = local_file_api_filename
+		self.local_api_filename = api_methods.getLocalFiles('fileApi')
 		self.endpoint = 'files'
 		all_expand_fields = [
 			'analysis', 'analysis.metadata.read_groups', 'analysis.input_files', 
@@ -136,7 +131,7 @@ class FileApi(BaseApi):
 		else:
 			index_file_id = index_file_name = index_file_md5 = None
 
-		histology = utilities.getHistology(case_uuid)
+		histology = api_methods.getHistology(case_uuid)
 
 		infodict = {
 		#---------------- Basic file info ----------------
@@ -165,12 +160,3 @@ class FileApi(BaseApi):
 			'indexMd5sum': index_file_md5
 		}
 		return infodict
-	def _getFileInformation(self, response):
-
-		file_type = response['file_type']
-		file_size = response['file_size']
-
-		result = {
-
-		}
-		return result
