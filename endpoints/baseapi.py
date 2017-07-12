@@ -1,6 +1,5 @@
 import json
 from collections import defaultdict
-from pprint import pprint
 import os
 import requests
 
@@ -54,4 +53,10 @@ class BaseApi:
 
 	def processApiResponse(self, raw_response):
 		raise NotImplementedError()
+	def _defineLocalAttributes(self):
+		self.local_api_filename = None
+		self.endpoint = None
+		self.default_parameters = None
+		raise NotImplementedError()
+
 

@@ -1,9 +1,9 @@
-import api_methods
+import methods.api_files
 from .baseapi import BaseApi
 
 class CaseApi(BaseApi):
 	def _defineLocalAttributes(self):
-		self.local_api_filename = api_methods.getLocalFiles('caseApi')
+		self.local_api_filename = methods.api_files.getLocalFile('caseApi')
 		self.endpoint = 'cases'
 		self.default_parameters = {
 			'expand': ','.join(

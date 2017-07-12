@@ -1,4 +1,4 @@
-import api_methods
+import methods.api_files
 
 from .baseapi import BaseApi
 
@@ -6,7 +6,7 @@ from .baseapi import BaseApi
 
 class FileApi(BaseApi):
 	def _defineLocalAttributes(self):
-		self.local_api_filename = api_methods.getLocalFiles('fileApi')
+		self.local_api_filename = methods.api_files.getLocalFile('fileApi')
 		self.endpoint = 'files'
 		all_expand_fields = [
 			'analysis', 'analysis.metadata.read_groups', 'analysis.input_files', 
@@ -131,7 +131,7 @@ class FileApi(BaseApi):
 		else:
 			index_file_id = index_file_name = index_file_md5 = None
 
-		histology = api_methods.getHistology(case_uuid)
+		histology = methods.getHistology(case_uuid)
 
 		infodict = {
 		#---------------- Basic file info ----------------
