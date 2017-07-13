@@ -18,6 +18,7 @@ def extractFileInfo(case_file):
 	file_caller = _extractFileCaller(case_file)
 
 	result = {
+		'fileId': case_file['file_id'],
 		'fileName': file_name,
 		'fileType': file_type,
 		'dataType': data_type,

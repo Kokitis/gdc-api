@@ -1,6 +1,6 @@
 print("Collecting api methods...")
-import methods.api_extractors as extract
-from .api_files import *
-from .api_generators import *
-from .api_mappers import *
-from .api_methods import *
+from . import api_extractors as extract
+from . import api_files
+from . import api_generators
+from . import api_mappers
+from . import api_methods

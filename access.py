@@ -1,7 +1,7 @@
-from endpoints import CaseApi, FileApi
-from methods import *
-from pprint import pprint
-pprint(dir())
+from .endpoints import CaseApi, FileApi
+from . import methods
+#from pprint import pprint
+#pprint(dir())
 
 FILE_API = FileApi()
 CASE_API = CaseApi()
@@ -22,7 +22,7 @@ def request(uuid, endpoint):
 	"""
 	identifier_type = _idType(uuid)
 	if identifier_type == 'barcode':
-		uuid = barcodeToUuid(uuid)[1]
+		uuid = methods.api_mappers.barcodeToUuid(uuid)[1]
 	
 	if endpoint == 'files':
 		response = FILE_API(uuid)
@@ -47,8 +47,8 @@ def generateCommand(uuid, **kwargs):
 	"""
 
 
-	program_location = getLocalFile('program')
-	token_location = getLocalFile('token')
+	program_location = methods.api_files.getLocalFile('program')
+	token_location = methods.api_files.getLocalFile('token')
 
 	command = """{program} download {uuid} --token {token}""".format(
 		program = program_location,

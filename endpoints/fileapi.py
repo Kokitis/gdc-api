@@ -1,4 +1,4 @@
-import methods.api_files
+from .. import methods
 
 from .baseapi import BaseApi
 
@@ -131,15 +131,16 @@ class FileApi(BaseApi):
 		else:
 			index_file_id = index_file_name = index_file_md5 = None
 
-		histology = methods.getHistology(case_uuid)
-
+		histology = methods.api_mappers.getHistology(case_uuid)
+		#from pprint import pprint
+		#pprint(sorted(response.keys()))
 		infodict = {
 		#---------------- Basic file info ----------------
 			'fileSize': response['file_size'],
 			'fileId': response['file_id'],
 			'fileName': response['file_name'],
-			'fileType': response['file_type'],
-			'fileFormat': response['file_format'],
+			'dataType': response['data_type'],
+			'dataFormat': response['data_format'],
 			#------------------- sample info -----------------
 			'sampleBarcode': sample_info['sampleBarcode'],
 			'sampleType': sample_info['sampleType'], #tissue type

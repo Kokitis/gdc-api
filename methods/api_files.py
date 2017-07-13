@@ -31,6 +31,8 @@ def getLocalFile(name, read = False):
 		_user_folder_key = 'HOME'
 	user_folder = os.getenv(_user_folder_key)
 
+	local_folder = os.path.dirname(os.path.dirname(__file__))
+
 	if name == 'clinical':
 		filename = [
 			"C:\\Users\\Deitrickc\\Documents\\Projects\\Genome Project\\Data\\Clinical Data\\nationwidechildrens.org_clinical_patient_esca.tsv",
@@ -38,7 +40,7 @@ def getLocalFile(name, read = False):
 		]
 
 	elif name == 'histology':
-		filename = "data/histology_diagnoses.tsv"
+		filename = os.path.join(local_folder, "data/histology_diagnoses.xlsx")
 	elif name == 'caseApi':
 		filename = "/home/upmc/Documents/Variant_Discovery_Pipeline/0_config_fileslocal_case_api.json"
 	elif name == 'fileApi':

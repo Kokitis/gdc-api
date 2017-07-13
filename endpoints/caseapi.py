@@ -1,4 +1,4 @@
-import methods.api_files
+from .. import methods
 from .baseapi import BaseApi
 
 class CaseApi(BaseApi):
