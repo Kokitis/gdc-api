@@ -1,6 +1,6 @@
 
 import os
-from github import tabletools
+from ..github import tabletools
 
 def _attemptRead(fns, op = 'or'):
 	final_table = list()

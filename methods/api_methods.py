@@ -1,5 +1,5 @@
 
-from github import tabletools
+from ..github import tabletools
 from pprint import pprint
 
 def getFileIds(identifiers):

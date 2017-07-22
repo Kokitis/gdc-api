@@ -1,5 +1,5 @@
 from .api_files import *
-from github import tabletools
+from ..github import tabletools
 def barcodeToUuid(barcodes):
 	""" Converts a patient barcode or sample barcode into the corresponding uuid.
 	"""
@@ -24,11 +24,11 @@ def barcodeToUuid(barcodes):
 def getHistology(identifier):
 	histology_table = tabletools.Table(getLocalFile('histology'))
 
-	for index, row in histology_table:
+	for row in histology_table:
 		if identifier in row.values:
 			result = row['histology']
 			break
 	else:
 		result = "unknown"
 
-	return row
+	return result
